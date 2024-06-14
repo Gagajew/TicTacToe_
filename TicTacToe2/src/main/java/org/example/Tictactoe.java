@@ -21,12 +21,6 @@ public class Tictactoe {
         hasWinner();
     }
 
-    public void switchCurrentPlayer() {
-        this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
-        //Die Spieler werden gewechselt
-
-    }
-
     public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat
         Scanner scanner = new Scanner(System.in);
         boolean winner = false;
@@ -49,8 +43,6 @@ public class Tictactoe {
                     System.out.println("Invalid input! Please try again."); //sonst kommt die Meldung
                 }
             }
-            board.place(row, col, currentPlayer.getMarker()); //marker wird entsprechend gesetzt
-            switchCurrentPlayer();
         }
     }
 }
