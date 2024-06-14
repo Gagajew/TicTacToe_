@@ -1,0 +1,30 @@
+Index: TicTacToe2/src/main/java/org/example/Tictactoe.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.example;\r\n\r\nimport java.util.Scanner;\r\n\r\npublic class Tictactoe {\r\n    Player player1; //Variable player1 vom Typ Player\r\n    Player player2; //Variable player2 vom Typ Player\r\n    Player currentPlayer; //Variable currentPlayer vom Typ Player\r\n    Board board; //Variable board vom Typ Board\r\n\r\n    public Tictactoe() { //public Konstruktor Tictactoe\r\n        this.player1 = new Player('X'); //marker X für player1 zugewiesen\r\n        this.player2 = new Player('O'); //marker O für player2 zugewiesen\r\n        this.currentPlayer = this.player1; //erster Spieler ist player1\r\n        this.board = new Board(); //dem Board wird die Methode Board() zugewiesen\r\n    }\r\n\r\n    public void start() {\r\n        System.out.println(\"The game has started!\");\r\n        this.board.clear(); // Das Board ist leer beim Spielstart\r\n        hasWinner();\r\n    }\r\n\r\n    public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat\r\n        Scanner scanner = new Scanner(System.in);\r\n        boolean winner = false;\r\n\r\n\r\n        while (!board.isFull() && !winner) { //während das Board leer ist und es keinen Gewinner gibt\r\n            this.board.print(); //wird das Board dargestellt\r\n            System.out.println(\"Current player: \" + this.currentPlayer.getMarker()); //der Spieler, der an der Reihe ist, wird angezeigt\r\n\r\n            int row, col; //Spalte und Reihe definiert als Integer\r\n            while (true) {\r\n                System.out.print(\"Enter row (0, 1, 2):\"); //Ausgabe des Textes in der Klammer\r\n                row = scanner.nextInt(); //Eingabe der Reihe\r\n                System.out.print(\"Enter col (0, 1, 2):\");\r\n                col = scanner.nextInt(); //Eingabe der Zeile\r\n\r\n                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) { //wenn der eingegebene Wert innerhalb der Matrix liegt und das Feld leer ist\r\n                    break; //wird die Schleife aufgehalten\r\n                } else {\r\n                    System.out.println(\"Invalid input! Please try again.\"); //sonst kommt die Meldung\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n
+===================================================================
+diff --git a/TicTacToe2/src/main/java/org/example/Tictactoe.java b/TicTacToe2/src/main/java/org/example/Tictactoe.java
+--- a/TicTacToe2/src/main/java/org/example/Tictactoe.java	
++++ b/TicTacToe2/src/main/java/org/example/Tictactoe.java	
+@@ -21,6 +21,12 @@
+         hasWinner();
+     }
+ 
++    public void switchCurrentPlayer() {
++        this.currentPlayer = (this.currentPlayer == this.player1) ? this.player2 : this.player1;
++        //Die Spieler werden gewechselt
++
++    }
++
+     public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat
+         Scanner scanner = new Scanner(System.in);
+         boolean winner = false;
+@@ -43,6 +49,8 @@
+                     System.out.println("Invalid input! Please try again."); //sonst kommt die Meldung
+                 }
+             }
++            board.place(row, col, currentPlayer.getMarker()); //marker wird entsprechend gesetzt
++            switchCurrentPlayer();
+         }
+     }
+ }
