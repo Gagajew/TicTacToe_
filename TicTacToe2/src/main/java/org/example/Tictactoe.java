@@ -63,6 +63,7 @@ public class Tictactoe {
             System.out.println("Okay then...goodbye!");
             scanner.close(); //scanner wird hier unterbrochen und das System wird dann auch hier gestoppt
         }
+
     }
 
 }
