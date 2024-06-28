@@ -63,7 +63,8 @@ public class Tictactoe {
             if (!winner){ //wenn es keinen Gewinner gibt
                 System.out.println("Wow...it's a draw!");
             }
-        System.out.println("Do you want to play again? (Y/N)"); //Möglichkeit das Spiel zu wiederholen
+
+            System.out.println("Do you want to play again? (Y/N)"); //Möglichkeit das Spiel zu wiederholen
             String playAgain = scanner.next(); //string variable - scanner wird noch nicht unterbrochen
 
             if(playAgain.equalsIgnoreCase("y")){ //wenn antwort des benutzers "y"
