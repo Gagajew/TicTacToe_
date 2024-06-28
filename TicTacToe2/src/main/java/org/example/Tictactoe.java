@@ -50,7 +50,19 @@ public class Tictactoe {
                 }
             }
             board.place(row, col, currentPlayer.getMarker()); //marker wird entsprechend gesetzt
-            switchCurrentPlayer();
-        }
+
+            if (board.checkWin(currentPlayer.getMarker())){ //wenn der gesetzte Marker richtig gesetzt wurde und einen Gewinner markiert
+                    winner = true; //wird ein Gewinner bestimmt
+                    this.board.print(); //das Board wird noch dargestellt
+                    System.out.println("Player " + this.currentPlayer.getMarker() + " won!"); //Gewinner wird angezeigt
+                }
+                else{
+                    switchCurrentPlayer(); //sonst wird der Spieler gewechselt
+                }
+            }
+            if (!winner){ //wenn es keinen Gewinner gibt
+                System.out.println("Wow...it's a draw!");
+            }
     }
 }
+
