@@ -63,6 +63,6 @@ public class Tictactoe {
             if (!winner){ //wenn es keinen Gewinner gibt
                 System.out.println("Wow...it's a draw!");
             }
-        }
     }
+}
 
