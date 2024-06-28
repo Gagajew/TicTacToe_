@@ -26,10 +26,6 @@ public class TictactoeTest {
         assertSame(game.player1, game.currentPlayer, "Current player should be switched back to player 1");
     }
 
-    public void setUp() {
-        game = new Tictactoe();
-    }
-
     @Test
     public void testHasWinnerWhenPlayerWins() {
         // Setze das Board manuell auf einen Gewinnzustand für Spieler 1
