@@ -1,3 +1,4 @@
+
 package org.example;
 
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class Tictactoe {
     public void start() {
         System.out.println("The game has started!");
         this.board.clear(); // Das Board ist leer beim Spielstart
-        hasWinner();
+        playGame();
     }
 
     public void switchCurrentPlayer() {
@@ -27,53 +28,56 @@ public class Tictactoe {
 
     }
 
-    public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat
+    public void playGame() {
         Scanner scanner = new Scanner(System.in);
         boolean winner = false;
 
+        while (!board.isFull() && !winner) {
+            this.board.print();
+            System.out.println("Current player: " + this.currentPlayer.getMarker());
 
-        while (!board.isFull() && !winner) { //während das Board leer ist und es keinen Gewinner gibt
-            this.board.print(); //wird das Board dargestellt
-            System.out.println("Current player: " + this.currentPlayer.getMarker()); //der Spieler, der an der Reihe ist, wird angezeigt
-
-            int row, col; //Spalte und Reihe definiert als Integer
+            int row, col;
             while (true) {
-                System.out.print("Enter row (0, 1, 2):"); //Ausgabe des Textes in der Klammer
-                row = scanner.nextInt(); //Eingabe der Reihe
+                System.out.print("Enter row (0, 1, 2):");
+                row = scanner.nextInt();
                 System.out.print("Enter col (0, 1, 2):");
-                col = scanner.nextInt(); //Eingabe der Zeile
+                col = scanner.nextInt();
 
-                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) { //wenn der eingegebene Wert innerhalb der Matrix liegt und das Feld leer ist
-                    break; //wird die Schleife aufgehalten
+                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) {
+                    break;
                 } else {
-                    System.out.println("Invalid input! Please try again."); //sonst kommt die Meldung
+                    System.out.println("Invalid input! Please try again.");
                 }
             }
-            board.place(row, col, currentPlayer.getMarker()); //marker wird entsprechend gesetzt
+            board.place(row, col, currentPlayer.getMarker());
+            winner = checkForWinner();
+            switchCurrentPlayer();
+        }
 
-            if (board.checkWin(currentPlayer.getMarker())){ //wenn der gesetzte Marker richtig gesetzt wurde und einen Gewinner markiert
-                    winner = true; //wird ein Gewinner bestimmt
-                    this.board.print(); //das Board wird noch dargestellt
-                    System.out.println("Player " + this.currentPlayer.getMarker() + " won!"); //Gewinner wird angezeigt
-                }
-                else{
-                    switchCurrentPlayer(); //sonst wird der Spieler gewechselt
-                }
-            }
-            if (!winner){ //wenn es keinen Gewinner gibt
-                System.out.println("Wow...it's a draw!");
-            }
-        System.out.println("Do you want to play again? (Y/N)"); //Möglichkeit das Spiel zu wiederholen
-            String playAgain = scanner.next(); //string variable - scanner wird noch nicht unterbrochen
-
-            if(playAgain.equalsIgnoreCase("y")){ //wenn antwort des benutzers "y"
-                System.out.println("Great");
-                start();
-            }
-            else if(playAgain.equalsIgnoreCase("n")){ //wenn antwort des benutzers "n"
-                System.out.println("Okay then...goodbye!");
-                scanner.close(); //scanner wird hier unterbrochen und das System wird dann auch hier gestoppt
-            }
+        if (!winner) {
+            System.out.println("Wow...its a draw!");
+        }
+        System.out.println("Do you want to play again? (Y/N)");
+        String playAgain = scanner.next();
+    
+        if (playAgain.equalsIgnoreCase("y")) {
+            System.out.println("Great");
+            start();
+        } else if (playAgain.equalsIgnoreCase("n")) {
+            System.out.println("Okay then...goodbye!");
+            scanner.close();
+        }
     }
-}
 
+        public boolean checkForWinner() {
+            boolean winner = false;
+
+            if (board.checkWin(currentPlayer.getMarker())) {
+                winner = true;
+                this.board.print();
+                System.out.println("Player " + this.currentPlayer.getMarker() + " won!");
+            }
+            return winner;
+        }
+
+    }
