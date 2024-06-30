@@ -18,7 +18,7 @@ public class Tictactoe {
     public void start() {
         System.out.println("The game has started!");
         this.board.clear(); // Das Board ist leer beim Spielstart
-        hasWinner();
+        playGame();
     }
 
     public void switchCurrentPlayer() {
@@ -27,7 +27,7 @@ public class Tictactoe {
 
     }
 
-    public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat
+    /*public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat
         Scanner scanner = new Scanner(System.in);
         boolean winner = false;
 
@@ -75,6 +75,62 @@ public class Tictactoe {
                 System.out.println("Okay then...goodbye!");
                 scanner.close(); //scanner wird hier unterbrochen und das System wird dann auch hier gestoppt
             }
+    }*/
+
+    public boolean checkForWinner() {
+        boolean winner = false;
+
+        if (board.checkWin(currentPlayer.getMarker())) { // if a player wins
+            winner = true;
+            this.board.print();
+            System.out.println("Player " + this.currentPlayer.getMarker() + " won!");
+        } else {
+            switchCurrentPlayer();
+        }
+
+        return winner;
     }
+
+    public void playGame() {
+        Scanner scanner = new Scanner(System.in);
+        boolean winner = false;
+
+        while (!board.isFull() && !winner) {
+            this.board.print();
+            System.out.println("Current player: " + this.currentPlayer.getMarker());
+
+            int row, col;
+            while (true) {
+                System.out.print("Enter row (0, 1, 2):");
+                row = scanner.nextInt();
+                System.out.print("Enter col (0, 1, 2):");
+                col = scanner.nextInt();
+
+                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) {
+                    break;
+                } else {
+                    System.out.println("Invalid input! Please try again.");
+                }
+            }
+            board.place(row, col, currentPlayer.getMarker());
+            winner = checkForWinner();
+        }
+
+        if (!winner) {
+            System.out.println("Wow...it's a draw!");
+        }
+
+        System.out.println("Do you want to play again? (Y/N)");
+        String playAgain = scanner.next();
+
+        if (playAgain.equalsIgnoreCase("y")) {
+            System.out.println("Great");
+            start();
+        } else if (playAgain.equalsIgnoreCase("n")) {
+            System.out.println("Okay then...goodbye!");
+            scanner.close();
+        }
+    }
+
 }
 
