@@ -56,27 +56,17 @@ public class Tictactoe {
         if (!winner) {
             System.out.println("Wow...its a draw!");
         }
-        System.out.println("Do you want to play again? (Y/N)");
-        String playAgain = scanner.next();
-
-        if (playAgain.equalsIgnoreCase("y")) {
-            System.out.println("Great");
-            start();
-        } else if (playAgain.equalsIgnoreCase("n")) {
-            System.out.println("Okay then...goodbye!");
-            scanner.close();
-        }
     }
 
-    public boolean checkForWinner() {
-        boolean winner = false;
+        public boolean checkForWinner() {
+            boolean winner = false;
 
-        if (board.checkWin(currentPlayer.getMarker())) {
-            winner = true;
-            this.board.print();
-            System.out.println("Player " + this.currentPlayer.getMarker() + " won!");
+            if (board.checkWin(currentPlayer.getMarker())) {
+                winner = true;
+                this.board.print();
+                System.out.println("Player " + this.currentPlayer.getMarker() + " won!");
+            }
+            return winner;
         }
-        return winner;
-    }
 
-}
+    }
