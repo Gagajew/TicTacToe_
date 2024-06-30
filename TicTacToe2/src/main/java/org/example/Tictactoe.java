@@ -1,4 +1,3 @@
-
 package org.example;
 
 import java.util.Scanner;
@@ -56,16 +55,6 @@ public class Tictactoe {
 
         if (!winner) {
             System.out.println("Wow...its a draw!");
-        }
-        System.out.println("Do you want to play again? (Y/N)");
-        String playAgain = scanner.next();
-    
-        if (playAgain.equalsIgnoreCase("y")) {
-            System.out.println("Great");
-            start();
-        } else if (playAgain.equalsIgnoreCase("n")) {
-            System.out.println("Okay then...goodbye!");
-            scanner.close();
         }
     }
 
