@@ -3,7 +3,7 @@ name: Feature Branch CI
 on:
   push:
     branches: 
-      - feature/**
+      - '**'
   
 
 jobs:
@@ -17,4 +17,4 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-    - run: mvn test --file TicTacToe2/pom.xml
+    - run: mvn test --file ./TicTacToe2/pom.xml
