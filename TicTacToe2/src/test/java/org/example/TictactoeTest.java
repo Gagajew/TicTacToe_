@@ -34,7 +34,7 @@ public class TictactoeTest {
         game.board.place(0, 2, 'X');
         game.currentPlayer = game.player1;
 
-        game.hasWinner();
+        game.checkForWinner();
         // Annahme: hasWinner gibt eine Art von Ausgabe, die Sie prüfen können,
         // oder ändert den Spielzustand, den Sie überprüfen können
         // Dieser Test könnte an Ihre Implementierung angepasst werden.
@@ -47,7 +47,7 @@ public class TictactoeTest {
         game.board.place(0, 1, 'O');
         game.board.place(0, 2, 'X');
 
-        game.hasWinner();
+        game.checkForWinner();
         // Überprüfe auf Unentschieden oder fortlaufendes Spiel
         // Dieser Test könnte an Ihre Implementierung angepasst werden.
     }

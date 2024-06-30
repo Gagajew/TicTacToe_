@@ -49,7 +49,24 @@ public class Tictactoe {
                 }
             }
             board.place(row, col, currentPlayer.getMarker());
+            winner = checkForWinner();
             switchCurrentPlayer();
         }
+
+        if (!winner) {
+            System.out.println("Wow...its a draw!");
+        }
     }
-}
+
+        public boolean checkForWinner() {
+            boolean winner = false;
+
+            if (board.checkWin(currentPlayer.getMarker())) {
+                winner = true;
+                this.board.print();
+                System.out.println("Player " + this.currentPlayer.getMarker() + " won!");
+            }
+            return winner;
+        }
+
+    }
