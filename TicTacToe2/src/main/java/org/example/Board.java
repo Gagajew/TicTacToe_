@@ -61,4 +61,4 @@ public class Board {
         }
         return cells[0][2] == marker && cells[1][1] == marker && cells[2][0] == marker;
     }
-}
+
