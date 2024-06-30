@@ -18,7 +18,7 @@ public class Tictactoe {
     public void start() {
         System.out.println("The game has started!");
         this.board.clear(); // Das Board ist leer beim Spielstart
-        hasWinner();
+        playGame();
     }
 
     public void switchCurrentPlayer() {
@@ -27,29 +27,28 @@ public class Tictactoe {
 
     }
 
-    public void hasWinner() { //Methode zur Überprüfung, ob es einen Gewinner gibt und wer gewonnen hat
+    public void playGame() {
         Scanner scanner = new Scanner(System.in);
         boolean winner = false;
 
+        while (!board.isFull() && !winner) {
+            this.board.print();
+            System.out.println("Current player: " + this.currentPlayer.getMarker());
 
-        while (!board.isFull() && !winner) { //während das Board leer ist und es keinen Gewinner gibt
-            this.board.print(); //wird das Board dargestellt
-            System.out.println("Current player: " + this.currentPlayer.getMarker()); //der Spieler, der an der Reihe ist, wird angezeigt
-
-            int row, col; //Spalte und Reihe definiert als Integer
+            int row, col;
             while (true) {
-                System.out.print("Enter row (0, 1, 2):"); //Ausgabe des Textes in der Klammer
-                row = scanner.nextInt(); //Eingabe der Reihe
+                System.out.print("Enter row (0, 1, 2):");
+                row = scanner.nextInt();
                 System.out.print("Enter col (0, 1, 2):");
-                col = scanner.nextInt(); //Eingabe der Zeile
+                col = scanner.nextInt();
 
-                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) { //wenn der eingegebene Wert innerhalb der Matrix liegt und das Feld leer ist
-                    break; //wird die Schleife aufgehalten
+                if (row >= 0 && row < 3 && col >= 0 && col < 3 && board.isCellEmpty(row, col)) {
+                    break;
                 } else {
-                    System.out.println("Invalid input! Please try again."); //sonst kommt die Meldung
+                    System.out.println("Invalid input! Please try again.");
                 }
             }
-            board.place(row, col, currentPlayer.getMarker()); //marker wird entsprechend gesetzt
+            board.place(row, col, currentPlayer.getMarker());
             switchCurrentPlayer();
         }
     }
