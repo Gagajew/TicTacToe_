@@ -50,7 +50,31 @@ public class Tictactoe {
                 }
             }
             board.place(row, col, currentPlayer.getMarker()); //marker wird entsprechend gesetzt
-            switchCurrentPlayer();
-        }
+
+            if (board.checkWin(currentPlayer.getMarker())){ //wenn der gesetzte Marker richtig gesetzt wurde und einen Gewinner markiert
+                    winner = true; //wird ein Gewinner bestimmt
+                    this.board.print(); //das Board wird noch dargestellt
+                    System.out.println("Player " + this.currentPlayer.getMarker() + " won!"); //Gewinner wird angezeigt
+                }
+                else{
+                    switchCurrentPlayer(); //sonst wird der Spieler gewechselt
+                }
+            }
+            if (!winner){ //wenn es keinen Gewinner gibt
+                System.out.println("Wow...it's a draw!");
+            }
+
+            System.out.println("Do you want to play again? (Y/N)"); //Möglichkeit das Spiel zu wiederholen
+            String playAgain = scanner.next(); //string variable - scanner wird noch nicht unterbrochen
+
+            if(playAgain.equalsIgnoreCase("y")){ //wenn antwort des benutzers "y"
+                System.out.println("Great");
+                start();
+            }
+            else if(playAgain.equalsIgnoreCase("n")){ //wenn antwort des benutzers "n"
+                System.out.println("Okay then...goodbye!");
+                scanner.close(); //scanner wird hier unterbrochen und das System wird dann auch hier gestoppt
+            }
     }
 }
+
